@@ -11,6 +11,10 @@ var fullColorHex = function(r,g,b) {
   var blue = rgbToHex(b);
   return red+green+blue;
 };
+function displayInstuctions()
+{
+	alert("The RGB color model is an additive color model in which red, green, and blue light are added together in various ways to reproduce a broad array of colors. The name of the model comes from the initials of the three additive primary colors, red, green, and blue. \n\nYour task is to guess which colour is represented from the given numbers in the RGB(). \nReference: https://en.wikipedia.org/wiki/RGB_color_model ");
+}
 function generateColor(btn)
 {
 	var r = Math.floor(Math.random()*255)+1;
