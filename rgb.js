@@ -9,7 +9,7 @@ var fullColorHex = function(r,g,b) {
   var red = rgbToHex(r);
   var green = rgbToHex(g);
   var blue = rgbToHex(b);
-  return red+green+blue;
+  return '#'+red+green+blue;
 };
 function displayInstuctions()
 {
@@ -20,28 +20,38 @@ function generateColor(btn)
 	var r = Math.floor(Math.random()*255)+1;
 	var g = Math.floor(Math.random()*255)+1;
 	var b = Math.floor(Math.random()*255)+1;
-	document.getElementById("color"+btn).style.backgroundColor = '#'+fullColorHex(r,g,b);
+	document.getElementById("color"+btn).style.backgroundColor = fullColorHex(r,g,b);
 }
-var r = Math.floor(Math.random()*255)+1;
-var g = Math.floor(Math.random()*255)+1;
-var b = Math.floor(Math.random()*255)+1;
-document.getElementById("color").innerHTML = "RGB("+ r+","+g+","+b+")";
-//document.getElementById("color").style.backgroundColor = '#'+fullColorHex(r,g,b);
-var ans_btn = Math.floor(Math.random()*6)+1;
-var ans = document.getElementById("color"+ans_btn);
-ans.style.backgroundColor = '#'+fullColorHex(r,g,b);
-for (var i = 1; i <= 6; i++) {
-	if(i==ans_btn)
-		continue;
-	generateColor(i);
 
+var ans_btn, r, g, b;
+function initialise()
+{
+	r = Math.floor(Math.random()*255)+1;
+	g = Math.floor(Math.random()*255)+1;
+	b = Math.floor(Math.random()*255)+1;
+	document.getElementById("result").innerHTML = "";
+	document.getElementById("color").innerHTML = "RGB("+ r+","+g+","+b+")";
+	//document.getElementById("color").style.backgroundColor = fullColorHex(r,g,b);
+	ans_btn = Math.floor(Math.random()*6)+1;
+	var ans = document.getElementById("color"+ans_btn);
+	ans.style.backgroundColor = fullColorHex(r,g,b);
+	for (var i = 1; i <= 6; i++) {
+		if(i==ans_btn)
+			continue;
+		generateColor(i);
+	}
+	for (var i = 1; i <= 6; i++) {
+		var button = document.getElementById('color'+i);
+		button.disabled = false;
+	}
+	document.getElementById("jumbo").style.backgroundColor = "#e9ecef";
 }
 function check(bt)
 {
 	if(bt[5] == ans_btn)
 	{
 		document.getElementById("result").innerHTML = "Yayy! Correct";
-		document.getElementById("jumbo").style.backgroundColor = '#'+fullColorHex(r,g,b);
+		document.getElementById("jumbo").style.backgroundColor = fullColorHex(r,g,b);
 		for (var i = 1; i <= 6; i++) {
 			document.getElementById("color"+i).disabled = true;
 		}
@@ -55,13 +65,4 @@ function check(bt)
 	}
 }
 
-
-
-
-var btn1 = document.getElementById("color1");
-var btn2 = document.getElementById("color2");
-var btn3 = document.getElementById("color3");
-var btn4 = document.getElementById("color4");
-var btn5 = document.getElementById("color5");
-var btn6 = document.getElementById("color6");
-//bt1.style.backgroundColor: rgb(r,g,b);
+initialise();
